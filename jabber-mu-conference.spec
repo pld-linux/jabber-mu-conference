@@ -2,12 +2,12 @@
 Summary:	Conference module for Jabber
 Summary(pl):	Modu³ konferencyjny systemu Jabber
 Name:		jabber-mu-conference
-Version:	0.5.2
-Release:	2
+Version:	0.6.0
+Release:	1
 License:	distributable
 Group:		Applications/Communications
 Source0:	http://www.jabberstudio.org/files/mu-conference/mu-conference-%{version}.tar.gz
-# Source0-md5:	c8167e4209278c22e96da20355e8cf49
+# Source0-md5:	e97433bf4a978329d639ce872bee3223
 Source1:	mu-conference.xml
 Source2:	jabber-muc.init
 Source3:	jabber-muc.sysconfig
@@ -36,7 +36,8 @@ bazowa implementacja protoko³u MUC (JEP-0045).
 %build
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -Wall -I. -I.. -I/usr/include/openssl -DHAVE_SSL -fPIC -I/usr/include/jabberd14 -I../include"
+	OFLAGS="%{rpmcflags}" \
+	libdir="%{_libdir}"
 
 
 %install
