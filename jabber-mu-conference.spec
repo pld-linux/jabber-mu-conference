@@ -5,20 +5,22 @@ Version:	0.3
 Release:	1
 License:	distributable
 Group:		Applications/Communications
-Source0:	http://download.jabber.org/dists/1.4/final/muconference-%{version}.tar.gz
+Source0:	http://files.jabberstudio.org/mu-conference/muconference-%{version}.tar.gz
 Source1:	mu-conference.xml
 Patch0:		%{name}-Makefile.patch
-URL:		http://www.jabber.org/
+URL:		http://mu-conference.jabberstudio.org/
 BuildRequires:	jabber-devel
 %requires_eq  	jabber
 Requires:	jabber >= 1.4.2-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This is the conferencing/groupchat service for the Jabber server.
+This is the new multi-user conferencing service for the Jabber server. This is
+the reference implementation of MUC protocol (JEP-0045).
 
 %description -l pl
-To jest modu³ konferencji/grupowych czatów dla serwera Jabber.
+To jest nowy modu³ konferencji/grupowych czatów dla serwera Jabber. To jest
+bazowa implementacja protoko³u MUC (JEP-0045).
 
 %prep
 %setup -qn mu-conference
