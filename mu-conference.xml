@@ -1,0 +1,62 @@
+<jabber>
+  <!-- For this to work, you should also update /etc/jabber/jabber.xml
+       Add the folowing (changed to your needs):
+
+  <browse>
+    
+   ...
+
+	<item category="conference" type="public" jid="muconference.localhost" name="Public Conferencing" version="0.3">
+	  <ns>jabber:iq:register</ns>
+	  <ns>gc-1.0</ns>
+	  <ns>http://jabber.org/protocol/muc</ns>
+	</item>
+
+   ...
+
+  </browse>
+
+
+  <service id="muconferencelinker">
+    <host>muconference.localhost</host>
+    <accept>
+      <ip>127.0.0.1</ip>
+      <port>1237</port>
+      <secret>test</secret>
+    </accept>
+  </service>
+  -->
+
+  <!-- This connects the conference process to the master process -->
+  <service id="muconferencelinker">
+    <uplink/>
+    <connect>
+      <ip>127.0.0.1</ip>
+      <port>1237</port>
+      <secret>test</secret>
+    </connect>
+  </service>
+
+  <service id="muconference.localhost">
+    <load><conference>/usr/lib/jabberd/muconference.so</conference></load>
+    <conference xmlns="jabber:config:conference">
+      <public/>
+      <vCard>
+        <FN>Public Chatrooms</FN>
+        <DESC>This service is for public chatrooms.</DESC>
+        <URL>http://muconference.localhost/logs/</URL>
+      </vCard>
+      <history>20</history>
+      <logdir>/var/log/jabber/muc/</logdir>
+      <sadmin>admin@localhost</sadmin>
+      <notice>
+        <join>has become available</join>
+        <leave>has left</leave>
+        <rename>is now known as</rename>
+      </notice>
+    </conference>
+  </service>
+
+  <pidfile>/var/lib/jabber/conference.pid</pidfile>
+
+</jabber>
