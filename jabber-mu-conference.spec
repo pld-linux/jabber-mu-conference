@@ -1,3 +1,4 @@
+# TODO: optflags
 Summary:	Conference module for Jabber
 Summary(pl):	Modu³ konferencyjny systemu Jabber
 Name:		jabber-mu-conference
@@ -13,6 +14,10 @@ Source3:	jabber-muc.sysconfig
 Patch0:		%{name}-Makefile.patch
 URL:		http://mu-conference.jabberstudio.org/
 BuildRequires:	jabberd14-devel
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
+Requires(post):	perl-base
+Requires(post):	textutils
 %requires_eq	jabberd14
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
