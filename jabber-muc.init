@@ -1,0 +1,76 @@
+#!/bin/bash
+#
+#/etc/rc.d/init.d/jabber-muc
+#
+# Starts the at daemon
+#
+# chkconfig:	345 40 60
+# description:	Jabber Multi-User Conference (MUC) service
+# processname:	jabber-muc
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config - may override defaults
+[ -f /etc/sysconfig/jabber-muc ] && . /etc/sysconfig/jabber-muc
+
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
+		msg_network_down "Jabber multi-user conference"
+		exit 1
+	fi
+else
+	exit 0
+fi
+
+RETVAL=0
+case "$1" in
+  start)
+	if [ ! -f /var/lock/subsys/jabber-muc ]; then
+		msg_starting "Jabber multi-user conference"
+		daemon jabber-muc -c /etc/jabberd14/mu-conference.xml -B -U jabber -G jabber
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/jabber-muc
+	else
+		msg_already_running "Jabber multi-user conference"
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/jabber-muc ]; then
+		msg_stopping "Jabber multi-user conference"
+		killproc jabber-muc
+		rm -f /var/lock/subsys/jabber-muc >/dev/null 2>&1
+	else
+		msg_not_running "Jabber multi-user conference"
+	fi	
+	;;
+  restart)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  reload|force-reload)
+	if [ -f /var/lock/subsys/jabber-muc ]; then
+		msg_reloading "Jabber multi-user conference"
+		killproc jabber-muc -HUP
+		RETVAL=$?
+	else
+		msg_not_running "Jabber multi-user conference" >&2
+		exit 7
+	fi
+	;;
+  status)
+	status jabber-muc
+	exit $?
+	;;
+  *)
+	# show "Usage: %s {start|stop|restart|reload|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
