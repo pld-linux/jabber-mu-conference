@@ -1,12 +1,12 @@
 Summary:	Conference module for Jabber
 Summary(pl):	Modu³ konferencyjny systemu Jabber
 Name:		jabber-mu-conference
-Version:	0.3
-Release:	1
+Version:	0.5.2
+Release:	0.1
 License:	distributable
 Group:		Applications/Communications
-Source0:	http://www.jabberstudio.org/files/mu-conference/muconference-%{version}.tar.gz
-# Source0-md5:	3217d8026cea7e65b6e4afc394c79921
+Source0:	http://www.jabberstudio.org/files/mu-conference/mu-conference-%{version}.tar.gz
+# Source0-md5:	c8167e4209278c22e96da20355e8cf49
 Source1:	mu-conference.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://mu-conference.jabberstudio.org/
