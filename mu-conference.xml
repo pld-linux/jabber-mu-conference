@@ -1,53 +1,25 @@
 <jabber>
-  <!-- For this to work, you should also update /etc/jabber/jabber.xml
-       Add the folowing (changed to your needs):
-
-  <browse>
-    
-   ...
-
-	<item category="conference" type="public" jid="muconference.localhost" name="Public Conferencing" version="0.3">
-	  <ns>jabber:iq:register</ns>
-	  <ns>gc-1.0</ns>
-	  <ns>http://jabber.org/protocol/muc</ns>
-	</item>
-
-   ...
-
-  </browse>
-
-
-  <service id="muconferencelinker">
-    <host>muconference.localhost</host>
-    <accept>
-      <ip>127.0.0.1</ip>
-      <port>1237</port>
-      <secret>test</secret>
-    </accept>
-  </service>
-  -->
-
   <!-- This connects the conference process to the master process -->
-  <service id="muconferencelinker">
+  <service id="muc-linker">
     <uplink/>
     <connect>
       <ip>127.0.0.1</ip>
-      <port>1237</port>
-      <secret>test</secret>
+      <port>5347</port>
+      <secret>secret</secret>
     </connect>
   </service>
 
-  <service id="muconference.localhost">
-    <load><conference>/usr/lib/jabberd/mu-conference.so</conference></load>
+  <service id="muc.localhost">
+    <load><conference>/usr/lib/jabberd14/mu-conference.so</conference></load>
     <conference xmlns="jabber:config:conference">
       <public/>
       <vCard>
         <FN>Public Chatrooms</FN>
         <DESC>This service is for public chatrooms.</DESC>
-        <URL>http://muconference.localhost/logs/</URL>
+        <URL>http://muc.localhost/logs/</URL>
       </vCard>
       <history>20</history>
-      <logdir>/var/log/jabber/muc/</logdir>
+      <logdir>/var/log/jabberd14/mu-conference/</logdir>
       <sadmin>admin@localhost</sadmin>
       <notice>
         <join>has become available</join>
@@ -57,6 +29,32 @@
     </conference>
   </service>
 
-  <pidfile>/var/lib/jabber/mu-conference.pid</pidfile>
+  <log id='rlogger'>
+    <host/>
+    <logtype/>
+    <format>%d: [%t] (%h): %s</format>
+    <file>/var/log/jabberd14/mu-conference-record.log</file>
+    <stderr/>
+  </log>
+
+  <log id='elogger'>
+    <host/>
+    <logtype/>
+    <format>%d: [%t] (%h): %s</format>
+    <file>/var/log/jabberd14/mu-conference-error.log</file>
+    <stderr/>
+  </log>
+
+  <xdb id="xdb">
+    <host/>
+    <load>
+      <xdb_file>/usr/lib/jabberd14/xdb_file.so</xdb_file>
+    </load>
+    <xdb_file xmlns="jabber:config:xdb_file">
+      <spool>/var/lib/jabberd14/spool</spool>
+    </xdb_file>
+  </xdb>
+  
+  <pidfile>/var/lib/jabberd14/mu-conference.pid</pidfile>
 
 </jabber>
