@@ -1,4 +1,3 @@
-# TODO: optflags
 Summary:	Conference module for Jabber
 Summary(pl):	Modu³ konferencyjny systemu Jabber
 Name:		jabber-mu-conference
@@ -22,12 +21,12 @@ Requires(post):	textutils
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This is the new multi-user conferencing service for the Jabber server. This is
-the reference implementation of MUC protocol (JEP-0045).
+This is the new multi-user conferencing service for the Jabber server.
+This is the reference implementation of MUC protocol (JEP-0045).
 
 %description -l pl
-To jest nowy modu³ konferencji/grupowych czatów dla serwera Jabber. To jest
-bazowa implementacja protoko³u MUC (JEP-0045).
+To jest nowy modu³ konferencji/grupowych czatów dla serwera Jabber. To
+jest wzorcowa implementacja protoko³u MUC (JEP-0045).
 
 %prep
 %setup -qn mu-conference-%{version}
@@ -38,7 +37,6 @@ bazowa implementacja protoko³u MUC (JEP-0045).
 	CC="%{__cc}" \
 	OFLAGS="%{rpmcflags} -fPIC" \
 	libdir="%{_libdir}"
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
