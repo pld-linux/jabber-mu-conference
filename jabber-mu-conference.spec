@@ -54,6 +54,7 @@ if [ -f /etc/jabber/secret ] ; then
 	fi
 fi
 
+/sbin/chkconfig --add jabber-muc
 if [ -r /var/lock/subsys/jabber-muc ]; then
 	/etc/rc.d/init.d/jabber-muc restart >&2
 else
@@ -65,6 +66,7 @@ if [ "$1" = "0" ]; then
 	if [ -r /var/lock/subsys/jabber-muc ]; then
 		/etc/rc.d/init.d/jabber-muc stop >&2
 	fi
+	/sbin/chkconfig --del jabber-muc
 fi
 
 %files
