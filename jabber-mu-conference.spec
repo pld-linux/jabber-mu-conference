@@ -60,4 +60,4 @@ fi
 %doc README FAQ ChangeLog TODO *.xml
 %attr(755,root,root) %{_libdir}/jabberd/*
 %attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabberd/*
-%attr(775,root,jabber) /var/log/jabber/muc
+%dir %attr(775,root,jabber) /var/log/jabber/muc
