@@ -11,7 +11,7 @@ Source1:	mu-conference.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://mu-conference.jabberstudio.org/
 BuildRequires:	jabber-devel
-%requires_eq  	jabber
+%requires_eq	jabber
 Requires:	jabber >= 1.4.2-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -43,12 +43,12 @@ rm -rf $RPM_BUILD_ROOT
 %post
 if [ -r /var/lock/subsys/jabberd ]; then
 	if [ -r /var/lock/subsys/jabber/mu-conference ]; then
-        	/etc/rc.d/init.d/jabberd restart mu-conference >&2
+		/etc/rc.d/init.d/jabberd restart mu-conference >&2
 	else
-        	echo "Run \"/etc/rc.d/init.d/jabberd start mu-conference\" to start Jabber mu-conference service."
+		echo "Run \"/etc/rc.d/init.d/jabberd start mu-conference\" to start Jabber mu-conference service."
 	fi
 else
-        echo "Run \"/etc/rc.d/init.d/jabberd start\" to start Jabber server."
+	echo "Run \"/etc/rc.d/init.d/jabberd start\" to start Jabber server."
 fi
 
 %preun
