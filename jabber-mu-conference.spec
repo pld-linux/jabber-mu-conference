@@ -11,6 +11,7 @@ Patch0:		%{name}-Makefile.patch
 URL:		http://www.jabber.org/
 BuildRequires:	jabber-devel
 %requires_eq  	jabber
+Requires:	jabber >= 1.4.2-4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
