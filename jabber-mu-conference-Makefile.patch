@@ -1,0 +1,12 @@
+diff -durN mu-conference.orig/src/Makefile mu-conference/src/Makefile
+--- mu-conference.orig/src/Makefile	Mon Oct 28 18:55:34 2002
++++ mu-conference/src/Makefile	Wed Jan 22 15:18:46 2003
+@@ -1,6 +1,6 @@
+-include ../../platform-settings
++include /usr/lib/jabberd/platform-settings
+ 
+-CFLAGS:=$(CFLAGS) -I../../jabberd -I../include
++CFLAGS:=$(CFLAGS) -I/usr/include/jabberd -I../include
+ 
+ conference_OBJECTS=conference.o conference_room.o conference_user.o utils.o xdata.o admin.o roles.o xdb.o
+ 
