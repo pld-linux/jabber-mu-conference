@@ -1,0 +1,62 @@
+diff -dur mu-conference-0.6.0.orig/jcr/Makefile mu-conference-0.6.0/jcr/Makefile
+--- mu-conference-0.6.0.orig/jcr/Makefile	2003-10-13 04:02:21.000000000 +0200
++++ mu-conference-0.6.0/jcr/Makefile	2004-06-01 12:44:05.804852140 +0200
+@@ -2,10 +2,10 @@
+ #  $Id$
+ 
+ all: 
+-	cd jabberd/ ; make
+-	cd jcomp/ ; make lib
++	make -C jabberd
++	make -C jcomp lib
+ 
+ clean:
+-	cd jabberd/ ; make clean
+-	cd jcomp/ ; make clean
++	make -C jabberd clean
++	make -C jcomp clean
+ 
+diff -dur mu-conference-0.6.0.orig/jcr/jabberd/Makefile mu-conference-0.6.0/jcr/jabberd/Makefile
+--- mu-conference-0.6.0.orig/jcr/jabberd/Makefile	2003-10-14 02:20:25.000000000 +0200
++++ mu-conference-0.6.0/jcr/jabberd/Makefile	2004-06-01 12:44:05.804852140 +0200
+@@ -1,7 +1,7 @@
+ 
+ #  $Id$
+ CC=gcc
+-CFLAGS=-O2 -g -Wall -I. -I../lib `pkg-config --cflags glib-2.0` -D_REENTRANT
++CFLAGS=$(OFLAGS) -Wall -I. -I../lib `pkg-config --cflags glib-2.0` -D_REENTRANT
+ LIBS=
+ 
+ JCOMP_LIB_OBJECTS=expat.o \
+diff -dur mu-conference-0.6.0.orig/jcr/jcomp/Makefile mu-conference-0.6.0/jcr/jcomp/Makefile
+--- mu-conference-0.6.0.orig/jcr/jcomp/Makefile	2003-10-14 02:20:31.000000000 +0200
++++ mu-conference-0.6.0/jcr/jcomp/Makefile	2004-06-01 12:44:05.805852078 +0200
+@@ -1,7 +1,7 @@
+ 
+ #  $Id$
+ CC=gcc
+-CFLAGS=-O2 -g -Wall -I../lib -I. `pkg-config --cflags glib-2.0` -D_REENTRANT
++CFLAGS=$(OFLAGS) -Wall -I../lib -I. `pkg-config --cflags glib-2.0` -D_REENTRANT
+ LIBS=
+ 
+ JCOMP_OBJECTS=jcr_xdb.o \
+diff -dur mu-conference-0.6.0.orig/jcr/src/jcomp.mk mu-conference-0.6.0/jcr/src/jcomp.mk
+--- mu-conference-0.6.0.orig/jcr/src/jcomp.mk	2003-10-26 13:35:19.000000000 +0100
++++ mu-conference-0.6.0/jcr/src/jcomp.mk	2004-06-01 12:45:15.361561610 +0200
+@@ -19,14 +19,14 @@
+ # $Id$
+ 
+ CC:=gcc
+-CFLAGS:=$(CFLAGS) -O2 -g -Wall -I../../lib -I../include `pkg-config --cflags glib-2.0` -D_JCOMP -D_REENTRANT
++CFLAGS:=$(CFLAGS) $(OFLAGS) -Wall -I../jcr/lib -I../include `pkg-config --cflags glib-2.0` -D_JCOMP -D_REENTRANT
+ 
+ # Debug/Experimental
+ #CFLAGS:=$(CFLAGS) -pipe -Os -I../../jabberd -I../include 
+ #LIBS:=$(LIBS) /usr/local/lib/ccmalloc-gcc.o -lccmalloc 
+ #LIBS:=$(LIBS) -lmemusage
+ LIBS:=$(LIBS) -ljcomp -lm `pkg-config --libs glib-2.0` `pkg-config --libs gthread-2.0`
+-LDFLAGS:=-L../../lib 
++LDFLAGS:=-L../jcr/lib 
+ 
+ conference_OBJECTS=conference.o conference_room.o conference_user.o utils.o xdata.o admin.o roles.o xdb.o hash.o main.o
+ 
