@@ -5,8 +5,8 @@ Version:	0.3
 Release:	1
 License:	distributable
 Group:		Applications/Communications
-Source0:	http://files.jabberstudio.org/mu-conference/muconference-%{version}.tar.gz
-# Source0-md5:	be793738e1da625d28bdc875dd66cd24
+Source0:	http://www.jabberstudio.org/files/mu-conference/muconference-%{version}.tar.gz
+# Source0-md5:	3217d8026cea7e65b6e4afc394c79921
 Source1:	mu-conference.xml
 Patch0:		%{name}-Makefile.patch
 URL:		http://mu-conference.jabberstudio.org/
