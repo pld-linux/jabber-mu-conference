@@ -13,7 +13,7 @@ diff -dur mu-conference-0.6.0.orig/muc-jcr.xml mu-conference-0.6.0/muc-jcr.xml
 -  <spool>./spool/conference.localhost</spool>
 -  <logdir>./syslogs</logdir>
 -  <pidfile>./mu-conference.pid</pidfile>
-+  <spool>/var/lib/jabber-mu-conference/conference.localhost</spool>
++  <spool>/var/lib/jabber-mu-conference</spool>
 +  <logdir>/var/log/jabber-mu-conference</logdir>
 +  <pidfile>/var/run/jabber/mu-conference.pid</pidfile>
    <!--
