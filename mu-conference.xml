@@ -38,7 +38,7 @@
   </service>
 
   <service id="muconference.localhost">
-    <load><conference>/usr/lib/jabberd/muconference.so</conference></load>
+    <load><conference>/usr/lib/jabberd/mu-conference.so</conference></load>
     <conference xmlns="jabber:config:conference">
       <public/>
       <vCard>
@@ -57,6 +57,6 @@
     </conference>
   </service>
 
-  <pidfile>/var/lib/jabber/conference.pid</pidfile>
+  <pidfile>/var/lib/jabber/mu-conference.pid</pidfile>
 
 </jabber>
