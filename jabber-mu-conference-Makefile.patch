@@ -1,12 +1,13 @@
-diff -durN mu-conference-0.5.2.orig/src/Makefile mu-conference-0.5.2/src/Makefile
---- mu-conference-0.5.2.orig/src/Makefile	Mon Mar 10 08:03:07 2003
-+++ mu-conference-0.5.2/src/Makefile	Mon Sep 15 12:42:53 2003
-@@ -1,6 +1,6 @@
+diff -durN -x '*~' -x '*.orig' -x '*.rej' mu-conference-0.6.0.orig/src/Makefile mu-conference-0.6.0/src/Makefile
+--- mu-conference-0.6.0.orig/src/Makefile	2003-11-15 05:19:44.000000000 +0100
++++ mu-conference-0.6.0/src/Makefile	2004-01-03 12:50:12.000000000 +0100
+@@ -1,6 +1,7 @@
 -include ../../platform-settings
-+include /usr/lib/jabberd14/platform-settings
++libdir=/usr/lib
++include $(libdir)/jabberd14/platform-settings
  
--CFLAGS:=$(CFLAGS) -I../../jabberd -I../include 
-+CFLAGS:=$(CFLAGS) -I/usr/include/jabberd14 -I../include 
+-CFLAGS:=$(CFLAGS) -I../../jabberd -I../include `pkg-config --cflags glib-2.0`
++CFLAGS:=$(OFLAGS) -I/usr/include/jabberd14 -I../include `pkg-config --cflags glib-2.0`
+ LIBS:=$(LIBS) `pkg-config --libs glib-2.0`
  
  # Debug/Experimental
- #CFLAGS:=$(CFLAGS) -pipe -Os -I../../jabberd -I../include 
