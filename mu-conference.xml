@@ -55,6 +55,6 @@
     </xdb_file>
   </xdb>
   
-  <pidfile>/var/lib/jabberd14/mu-conference.pid</pidfile>
+  <pidfile>/var/run/jabber/mu-conference.pid</pidfile>
 
 </jabber>

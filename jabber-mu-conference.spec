@@ -33,11 +33,11 @@ bazowa implementacja protoko³u MUC (JEP-0045).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_sysconfdir}}/jabberd14 \
+install -d $RPM_BUILD_ROOT{%{_libdir}/jabberd14,%{_sysconfdir}/jabber} \
 	$RPM_BUILD_ROOT{%{_sbindir},/etc/{rc.d/init.d,sysconfig}}
 
 install src/mu-conference.so $RPM_BUILD_ROOT%{_libdir}/jabberd14
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabberd14
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/jabber
 ln -s %{_sbindir}/jabberd14 $RPM_BUILD_ROOT%{_sbindir}/jabber-muc
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/jabber-muc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-muc
@@ -46,11 +46,11 @@ install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-muc
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /etc/jabberd/secret ] ; then
-	SECRET=`cat /etc/jabberd/secret`
+if [ -f /etc/jabber/secret ] ; then
+	SECRET=`cat /etc/jabber/secret`
 	if [ -n "$SECRET" ] ; then
         	echo "Updating component authentication secret in the config file..."
-		perl -pi -e "s/>secret</>$SECRET</" /etc/jabberd14/mu-conference.xml
+		perl -pi -e "s/>secret</>$SECRET</" /etc/jabber/mu-conference.xml
 	fi
 fi
 
@@ -72,6 +72,6 @@ fi
 %doc README FAQ ChangeLog TODO *.xml
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_libdir}/jabberd14/*
-%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabberd14/*
+%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabber/*
 %attr(754,root,root) /etc/rc.d/init.d/jabber-muc
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/jabber-muc
