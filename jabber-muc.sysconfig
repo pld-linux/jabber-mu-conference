@@ -1,0 +1,5 @@
+# Customized setings for jabber-mu-conference
+
+# Define nice level for jabber-mu-conference 
+SERVICE_RUN_NICE_LEVEL="+5"
+
