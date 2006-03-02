@@ -18,7 +18,8 @@ Patch0:		%{name}-Makefiles.patch
 Patch1:		%{name}-config.patch
 Patch2:		%{name}-drop_priv.patch
 URL:		http://mu-conference.jabberstudio.org/
-Requires(post):	perl-base
+BuildRequires:	rpmbuild(macros) >= 1.268
+Requires(post):	sed >= 4.0
 Requires(post):	textutils
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
@@ -64,26 +65,20 @@ install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-muc
 rm -rf $RPM_BUILD_ROOT
 
 %post
-if [ -f /etc/jabber/secret ] ; then
-	SECRET=`cat /etc/jabber/secret`
+if [ -f %{_sysconfdir}/jabber/secret ] ; then
+	SECRET=`cat %{_sysconfdir}/jabber/secret`
 	if [ -n "$SECRET" ] ; then
-        	echo "Updating component authentication secret in the config file..."
-		perl -pi -e "s/>secret</>$SECRET</" /etc/jabber/mu-conference.xml
+		echo "Updating component authentication secret in the config file..."
+		%{__sed} -i -e "s/>secret</>$SECRET</" %{_sysconfdir}/jabber/mu-conference.xml
 	fi
 fi
 
 /sbin/chkconfig --add jabber-muc
-if [ -r /var/lock/subsys/jabber-muc ]; then
-	/etc/rc.d/init.d/jabber-muc restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/jabber-muc start\" to start Jabber mu-conference service."
-fi
+%service jabber-muc restart "Jabber mu-conference service"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -r /var/lock/subsys/jabber-muc ]; then
-		/etc/rc.d/init.d/jabber-muc stop >&2
-	fi
+	%service jabber-muc stop
 	/sbin/chkconfig --del jabber-muc
 fi
 
