@@ -18,10 +18,10 @@ Patch0:		%{name}-Makefiles.patch
 Patch1:		%{name}-config.patch
 Patch2:		%{name}-drop_priv.patch
 URL:		http://mu-conference.jabberstudio.org/
-PreReq:		rc-scripts
-Requires(post,preun):	/sbin/chkconfig
 Requires(post):	perl-base
 Requires(post):	textutils
+Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -91,9 +91,9 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog FAQ README TODO *.xml
 %attr(755,root,root) %{_sbindir}/*
-%attr(640,root,jabber) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/jabber/*
+%attr(640,root,jabber) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/jabber/*
 %attr(754,root,root) /etc/rc.d/init.d/jabber-muc
 %dir %attr(771,root,jabber) /var/lib/jabber-mu-conference/
 %dir %attr(775,root,jabber) /var/log/jabber-mu-conference/
 %dir %attr(775,root,jabber) /var/log/jabber-mu-conference/chats
-%config(noreplace) %verify(not size mtime md5) /etc/sysconfig/jabber-muc
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/jabber-muc
