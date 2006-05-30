@@ -59,7 +59,7 @@ case "$1" in
 		killproc jabber-muc -HUP
 		RETVAL=$?
 	else
-		msg_not_running "Jabber multi-user conference" >&2
+		msg_not_running "Jabber multi-user conference"
 		exit 7
 	fi
 	;;
