@@ -2,7 +2,7 @@
 %define	jcr_version 0.1.2
 
 Summary:	Conference module for Jabber
-Summary(pl):	Modu≥ konferencyjny systemu Jabber
+Summary(pl.UTF-8):   Modu≈Ç konferencyjny systemu Jabber
 Name:		jabber-mu-conference
 Version:	0.6.0
 Release:	4
@@ -29,9 +29,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is the new multi-user conferencing service for the Jabber server.
 This is the reference implementation of MUC protocol (JEP-0045).
 
-%description -l pl
-To jest nowy modu≥ konferencji/grupowych czatÛw dla serwera Jabber. To
-jest wzorcowa implementacja protoko≥u MUC (JEP-0045).
+%description -l pl.UTF-8
+To jest nowy modu≈Ç konferencji/grupowych czat√≥w dla serwera Jabber. To
+jest wzorcowa implementacja protoko≈Çu MUC (JEP-0045).
 
 %prep
 %setup -qn mu-conference-%{version} -a 1
