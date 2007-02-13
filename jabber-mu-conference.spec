@@ -2,7 +2,7 @@
 %define	jcr_version 0.1.2
 
 Summary:	Conference module for Jabber
-Summary(pl.UTF-8):   Moduł konferencyjny systemu Jabber
+Summary(pl.UTF-8):	Moduł konferencyjny systemu Jabber
 Name:		jabber-mu-conference
 Version:	0.6.0
 Release:	4
