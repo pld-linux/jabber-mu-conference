@@ -1,23 +1,18 @@
-
-%define	jcr_version 0.1.2
-
 Summary:	Conference module for Jabber
 Summary(pl.UTF-8):	Moduł konferencyjny systemu Jabber
 Name:		jabber-mu-conference
-Version:	0.6.0
-Release:	4
+Version:	0.7
+Release:	0.1
 License:	distributable
 Group:		Applications/Communications
-Source0:	http://www.jabberstudio.org/files/mu-conference/mu-conference-%{version}.tar.gz
-# Source0-md5:	e97433bf4a978329d639ce872bee3223
-Source1:	http://jabber.terrapin.com/JCR/jcr-%{jcr_version}.tar.gz
-# Source1-md5:	622a1bf538d5adc92a516c7ef4bfbf57
-Source2:	jabber-muc.init
-Source3:	jabber-muc.sysconfig
+Source0:	http://download.gna.org/mu-conference/mu-conference_%{version}.tar.gz
+# Source0-md5:	019e75d80a51da63ba7567341483b2e9
+Source1:	jabber-muc.init
+Source2:	jabber-muc.sysconfig
 Patch0:		%{name}-Makefiles.patch
 Patch1:		%{name}-config.patch
 Patch2:		%{name}-drop_priv.patch
-URL:		http://mu-conference.jabberstudio.org/
+URL:		https://gna.org/projects/mu-conference/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post):	sed >= 4.0
 Requires(post):	textutils
@@ -34,19 +29,13 @@ To jest nowy moduł konferencji/grupowych czatów dla serwera Jabber. To
 jest wzorcowa implementacja protokołu MUC (JEP-0045).
 
 %prep
-%setup -qn mu-conference-%{version} -a 1
-mv jcr-%{jcr_version} jcr
+%setup -qn mu-conference_%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-cp jcr/src/{main.c,jcomp.mk} src
 
 %build
-%{__make} -C jcr \
-	CC="%{__cc}" \
-	OFLAGS="%{rpmcflags}"
-
-%{__make} -C src -f jcomp.mk \
+%{__make} -C src \
 	CC="%{__cc}" \
 	OFLAGS="%{rpmcflags}"
 
@@ -57,9 +46,10 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/jabber \
 	$RPM_BUILD_ROOT{/var/log/%{name}/chats,/var/lib/%{name}}
 
 install src/mu-conference $RPM_BUILD_ROOT%{_sbindir}/jabber-muc
-install muc-jcr.xml $RPM_BUILD_ROOT%{_sysconfdir}/jabber/mu-conference.xml
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/jabber-muc
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/jabber-muc
+install muc-default.xml $RPM_BUILD_ROOT%{_sysconfdir}/jabber/mu-conference.xml
+install style.css $RPM_BUILD_ROOT%{_sysconfdir}/jabber/mu-conference-style.css
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/jabber-muc
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/jabber-muc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
