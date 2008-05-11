@@ -2,7 +2,7 @@ Summary:	Conference module for Jabber
 Summary(pl.UTF-8):	Moduł konferencyjny systemu Jabber
 Name:		jabber-mu-conference
 Version:	0.7
-Release:	0.1
+Release:	1
 License:	distributable
 Group:		Applications/Communications
 Source0:	http://download.gna.org/mu-conference/mu-conference_%{version}.tar.gz
