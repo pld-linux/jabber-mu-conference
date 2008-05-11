@@ -8,7 +8,7 @@ diff -ur mu-conference_0.7.orig/muc-default.xml mu-conference_0.7/muc-default.xm
 -  <ip>localhost</ip> <!-- adress of the jabber server -->
 -  <port>7009</port>  <!-- port used to connect the service to the jabber server -->
 +  <ip>127.0.0.1</ip> <!-- adress of the jabber server -->
-+  <port>5437</port>  <!-- port used to connect the service to the jabber server -->
++  <port>5347</port>  <!-- port used to connect the service to the jabber server -->
    <secret>secret</secret> <!-- secret shared with the jabber server -->
  
 -  <spool>./spool/chat.localhost</spool> <!-- directory containing the rooms data -->
