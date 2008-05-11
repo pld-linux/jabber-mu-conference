@@ -1,30 +1,32 @@
-diff -dur mu-conference-0.6.0.orig/muc-jcr.xml mu-conference-0.6.0/muc-jcr.xml
---- mu-conference-0.6.0.orig/muc-jcr.xml	2003-10-26 20:42:03.000000000 +0100
-+++ mu-conference-0.6.0/muc-jcr.xml	2004-06-01 13:02:57.369014309 +0200
+diff -ur mu-conference_0.7.orig/muc-default.xml mu-conference_0.7/muc-default.xml
+--- mu-conference_0.7.orig/muc-default.xml	2007-06-08 22:19:49.000000000 +0200
++++ mu-conference_0.7/muc-default.xml	2008-05-11 22:56:20.000000000 +0200
 @@ -11,13 +11,13 @@
  
-   <name>conference.localhost</name>
-   <host>conference.localhost</host>
--  <ip>localhost</ip>
-+  <ip>127.0.0.1</ip>
-   <port>5347</port>
-   <secret>secret</secret>
+   <name>conference.localhost</name> <!-- the jid of your component -->
+   <host>conference.localhost</host> <!-- this should be the same as above -->
+-  <ip>localhost</ip> <!-- adress of the jabber server -->
+-  <port>7009</port>  <!-- port used to connect the service to the jabber server -->
++  <ip>127.0.0.1</ip> <!-- adress of the jabber server -->
++  <port>5437</port>  <!-- port used to connect the service to the jabber server -->
+   <secret>secret</secret> <!-- secret shared with the jabber server -->
  
--  <spool>./spool/conference.localhost</spool>
--  <logdir>./syslogs</logdir>
--  <pidfile>./mu-conference.pid</pidfile>
-+  <spool>/var/lib/jabber-mu-conference</spool>
-+  <logdir>/var/log/jabber-mu-conference</logdir>
-+  <pidfile>/var/run/jabber/mu-conference.pid</pidfile>
-   <!--
-      <logstderr/>
-   -->
-@@ -31,7 +31,7 @@
+-  <spool>./spool/chat.localhost</spool> <!-- directory containing the rooms data -->
+-  <logdir>./syslogs</logdir> <!-- directory containing the debug log (the file is called mu-conference.log) -->
+-  <pidfile>./mu-conference.pid</pidfile> <!-- file that will contain the PID of the process -->
++  <spool>/var/lib/jabber-mu-conference</spool> <!-- directory containing the rooms data -->
++  <logdir>/var/log/jabber-mu-conference</logdir> <!-- directory containing the debug log (the file is called mu-conference.log) -->
++  <pidfile>/var/run/jabber/mu-conference.pid</pidfile> <!-- file that will contain the PID of the process -->
+   
+   <!--   <logstderr/> --> <!-- uncomment to also send log to stderr -->
+   
+@@ -32,7 +32,7 @@
          <URL>http://foo.bar/</URL>
        </vCard>
-       <history>40</history>
--      <logdir>./logs/</logdir>
-+      <logdir>/var/log/jabber-mu-conference/chats/</logdir>
+       <history>40</history> <!-- maximum numbers of history lines send when joining a room -->
+-      <logdir>./logs/</logdir> <!-- where to store the room logs -->
+-      <stylesheet>../style.css</stylesheet> <!--URL of the log stylesheet -->
++      <logdir>/var/log/jabber-mu-conference/chats/</logdir> <!-- where to store the room logs -->
++      <stylesheet>/etc/jabber/jabber-mu-conference-style.css</stylesheet> <!--URL of the log stylesheet -->
+       <!-- default text to send to legacy clients, will also be used in the logs -->
        <notice>
-         <join>has become available</join>
-         <leave>has left</leave>
