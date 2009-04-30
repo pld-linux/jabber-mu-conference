@@ -32,7 +32,7 @@ case "$1" in
   start)
 	if [ ! -f /var/lock/subsys/jabber-muc ]; then
 		msg_starting "Jabber multi-user conference"
-		daemon jabber-muc -c /etc/jabber/mu-conference.xml -B -U jabber -G jabber
+		daemon /usr/sbin/jabber-muc -c /etc/jabber/mu-conference.xml -B -U jabber -G jabber
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/jabber-muc
 	else
