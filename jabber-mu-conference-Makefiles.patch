@@ -1,45 +1,44 @@
-diff -ur mu-conference_0.7.orig/src/jabberd/Makefile mu-conference_0.7/src/jabberd/Makefile
---- mu-conference_0.7.orig/src/jabberd/Makefile	2007-06-08 22:19:48.000000000 +0200
-+++ mu-conference_0.7/src/jabberd/Makefile	2008-05-11 22:51:15.000000000 +0200
+diff -ur mu-conference_0.8.orig/src/jabberd/Makefile mu-conference_0.8/src/jabberd/Makefile
+--- mu-conference_0.8.orig/src/jabberd/Makefile	2008-03-25 17:50:13.000000000 +0100
++++ mu-conference_0.8/src/jabberd/Makefile	2009-11-05 12:55:04.188143009 +0100
 @@ -1,6 +1,6 @@
  
  CC=gcc
--CFLAGS=-O2 -Wall -I. -I../../include `pkg-config --cflags glib-2.0` -D_REENTRANT -DLIBIDN
-+CFLAGS=$(OFLAGS) -Wall -I. -I../../include `pkg-config --cflags glib-2.0` -D_REENTRANT -DLIBIDN
+-CFLAGS:=$(CFLAGS) -O2 -Wall -I. -I../../include `pkg-config --cflags glib-2.0` -D_REENTRANT -DLIBIDN
++CFLAGS:=$(CFLAGS) $(OFLAGS) -Wall -I. -I../../include `pkg-config --cflags glib-2.0` -D_REENTRANT -DLIBIDN
  LIBS=
  
  JCOMP_LIB_OBJECTS=expat.o \
-diff -ur mu-conference_0.7.orig/src/jcomp/Makefile mu-conference_0.7/src/jcomp/Makefile
---- mu-conference_0.7.orig/src/jcomp/Makefile	2007-06-08 22:19:48.000000000 +0200
-+++ mu-conference_0.7/src/jcomp/Makefile	2008-05-11 22:51:04.000000000 +0200
+diff -ur mu-conference_0.8.orig/src/jcomp/Makefile mu-conference_0.8/src/jcomp/Makefile
+--- mu-conference_0.8.orig/src/jcomp/Makefile	2008-03-25 17:50:13.000000000 +0100
++++ mu-conference_0.8/src/jcomp/Makefile	2009-11-05 12:55:50.331471273 +0100
 @@ -1,7 +1,7 @@
  
  #  $Id$
  CC=gcc
--CFLAGS=-O2 -Wall -I../../include -I. `pkg-config --cflags glib-2.0` -D_REENTRANT
-+CFLAGS=$(OFLAGS) -Wall -I../../include -I. `pkg-config --cflags glib-2.0` -D_REENTRANT
+-CFLAGS:=$(CFLAGS) -O2 -Wall -I../../include -I. `pkg-config --cflags glib-2.0` -D_REENTRANT
++CFLAGS:=$(CFLAGS) $(OFLAGS) -Wall -I../../include -I. `pkg-config --cflags glib-2.0` -D_REENTRANT
  LIBS=
  
  JCOMP_OBJECTS=jcr_xdb.o \
-diff -ur mu-conference_0.7.orig/src/Makefile mu-conference_0.7/src/Makefile
---- mu-conference_0.7.orig/src/Makefile	2007-06-08 22:19:48.000000000 +0200
-+++ mu-conference_0.7/src/Makefile	2008-05-11 22:52:55.000000000 +0200
-@@ -1,6 +1,6 @@
- 
+diff -ur mu-conference_0.8.orig/src/Makefile mu-conference_0.8/src/Makefile
+--- mu-conference_0.8.orig/src/Makefile	2007-07-17 00:05:44.000000000 +0200
++++ mu-conference_0.8/src/Makefile	2009-11-05 12:53:51.701483101 +0100
+@@ -1,5 +1,5 @@
  CC:=gcc
 -CFLAGS:=$(CFLAGS) -O2 -Wall -I../../lib -I../include `pkg-config --cflags glib-2.0` -D_JCOMP -D_REENTRANT -DLIBIDN
 +CFLAGS:=$(CFLAGS) $(OFLAGS) -Wall -I../../lib -I../include `pkg-config --cflags glib-2.0` -D_JCOMP -D_REENTRANT -DLIBIDN
  #CFLAGS:=$(CFLAGS) -O2 -Wall -I../../lib -I../include `pkg-config --cflags glib-2.0` -D_JCOMP -D_REENTRANT -DLIBIDN -DHAVE_MYSQL
- LIBS:=$(LIBS) -ljcomp -lm `pkg-config --libs glib-2.0` `pkg-config --libs gthread-2.0` -lexpat -lidn `mysql_config --libs`
- LDFLAGS:=-L.
+ LIBS:=$(LIBS) -ljcomp -lm `pkg-config --libs glib-2.0` `pkg-config --libs gthread-2.0` -lexpat -lidn
+ #LIBS:=$(LIBS) -ljcomp -lm `pkg-config --libs glib-2.0` `pkg-config --libs gthread-2.0` -lexpat -lidn `mysql_config --libs`
 @@ -19,8 +19,8 @@
  	$(CC) $(CFLAGS) $(MCFLAGS) -o mu-conference $(conference_OBJECTS) $(LDFLAGS) $(LIBS)
  
  libjcomp.a:
--	cd jabberd ; make 
--	cd jcomp ; make lib
-+	make -C jabberd
-+	make -C jcomp lib
+-	cd jabberd ; $(MAKE)
+-	cd jcomp ; $(MAKE) lib
++	$(MAKE) -C jabberd
++	$(MAKE) -C jcomp lib
  
  static: $(conference_OBJECTS)
  
@@ -47,7 +46,7 @@ diff -ur mu-conference_0.7.orig/src/Makefile mu-conference_0.7/src/Makefile
  
  clean:
  	rm -f $(conference_OBJECTS) mu-conference *~
--	cd jcomp ; make clean
--	cd jabberd ; make clean
-+	make -C jabberd clean
-+	make -C jcomp clean
+-	cd jcomp ; $(MAKE) clean
+-	cd jabberd ; $(MAKE) clean
++	$(MAKE) -C jcomp clean
++	$(MAKE) -C jabberd clean

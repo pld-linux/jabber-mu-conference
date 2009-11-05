@@ -1,6 +1,6 @@
-diff -ur mu-conference_0.7.orig/src/main.c mu-conference_0.7/src/main.c
---- mu-conference_0.7.orig/src/main.c	2007-06-08 22:19:48.000000000 +0200
-+++ mu-conference_0.7/src/main.c	2008-05-11 22:59:41.000000000 +0200
+diff -ur mu-conference_0.8.orig/src/main.c mu-conference_0.8/src/main.c
+--- mu-conference_0.8.orig/src/main.c	2007-06-29 11:01:03.000000000 +0200
++++ mu-conference_0.8/src/main.c	2009-11-05 13:03:46.704757099 +0100
 @@ -23,6 +23,11 @@
  #include "jcomp.h"
  #include "lib.h"
@@ -10,10 +10,10 @@ diff -ur mu-conference_0.7.orig/src/main.c mu-conference_0.7/src/main.c
 +#include <grp.h>
 +#include <pwd.h>
 +
- int main(int argc, char *argv[]) {
-   extern char *optarg;
-   extern int optind, opterr, optopt;
-@@ -35,6 +40,9 @@
+ void usage() {
+     printf("Usage: mu-conference [-B] [-s] [-h] [-d LEVEL] -c FILE\n");
+     printf("          -B         Put the daemon in background\n");
+@@ -44,6 +49,9 @@
    FILE *pid_stream;
    struct stat st;
    char *config_file = NULL;
@@ -23,16 +23,16 @@ diff -ur mu-conference_0.7.orig/src/main.c mu-conference_0.7/src/main.c
    pool p;
  
    /* GThread       *dthread; */ /* the packet delivery thread */
-@@ -45,7 +53,7 @@
+@@ -54,7 +62,7 @@
    g_thread_init(NULL);
    fprintf(stderr, "%s -- %s\n%s\n\n", _JCOMP_NAME, _JCOMP_VERS, _JCOMP_COPY);
  
--  while ((c = getopt(argc, argv, "Bsd:c:")) != EOF)
-+  while ((c = getopt(argc, argv, "Bsd:c:U:G:")) != EOF)
+-  while ((c = getopt(argc, argv, "Bshd:c:")) != EOF)
++  while ((c = getopt(argc, argv, "Bshd:c:U:G:")) != EOF)
      switch (c) {
        case 'B':
          inBackground = 1;
-@@ -60,14 +68,20 @@
+@@ -69,6 +77,14 @@
          message_mask_set = 1;
          break;
  
@@ -47,15 +47,7 @@ diff -ur mu-conference_0.7.orig/src/main.c mu-conference_0.7/src/main.c
        case 's':
          jcr->message_stderr = 1;
          message_stderr_set = 1;
-         break;
--
-     }
- 
--
-   /* The configuration file must be specified, and there is no default */
-   if (config_file == NULL) {
-     fprintf(stderr, "%s: Configuration file not specified, exiting.\n", JDBG);
-@@ -127,6 +141,29 @@
+@@ -139,6 +155,29 @@
    if (!message_stderr_set)
      jcr->message_stderr = (xmlnode_get_type(xmlnode_get_tag(jcr->config,"logstderr")) == NTYPE_TAG);
  
