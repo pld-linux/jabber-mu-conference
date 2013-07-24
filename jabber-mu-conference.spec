@@ -1,12 +1,12 @@
 Summary:	Conference module for Jabber
 Summary(pl.UTF-8):	Moduł konferencyjny systemu Jabber
 Name:		jabber-mu-conference
-Version:	0.8
-Release:	1
+Version:	0.8.81
+Release:	0.1
 License:	distributable
 Group:		Applications/Communications
-Source0:	http://download.gna.org/mu-conference/mu-conference_%{version}.tar.gz
-# Source0-md5:	3e11ae52499a65a577d4c697194fc1ce
+Source0:	http://download.gna.org/mu-conference/mu-conference-%{version}.tar.gz
+# Source0-md5:	66f15f772dde0a8cfd94621ed795167c
 Source1:	jabber-muc.init
 Source2:	jabber-muc.sysconfig
 Patch0:		%{name}-Makefiles.patch
@@ -29,7 +29,7 @@ To jest nowy moduł konferencji/grupowych czatów dla serwera Jabber. To
 jest wzorcowa implementacja protokołu MUC (JEP-0045).
 
 %prep
-%setup -qn mu-conference_%{version}
+%setup -qn mu-conference-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
